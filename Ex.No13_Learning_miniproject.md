@@ -11,7 +11,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 df = pd.read_csv('/content/sample_data')
-# Features and target
 X = df[['input_voltage']]
 y = df['el_power']
 split_index = int(len(df) * 0.8)
