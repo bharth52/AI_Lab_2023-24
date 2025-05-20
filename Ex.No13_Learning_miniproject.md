@@ -61,6 +61,8 @@ plt.ylabel('Electrical Power')
 plt.title('Linear Regression Results')
 plt.legend()
 plt.show()
+# output:
+
 
 ### Result:
 Thus the system was trained successfully and the prediction was carried out.
