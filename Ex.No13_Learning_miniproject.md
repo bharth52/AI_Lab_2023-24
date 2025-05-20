@@ -7,61 +7,32 @@ To write a program to train the classifier for -----------------.
 
 ### Program:
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-
-# Load the dataset
-df = pd.read_csv('/content/sample_data.csv')  # Ensure it's a valid CSV file
-
-# Define features and target
+from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
+df = pd.read_csv('/content/sample_data')
+# Features and target
 X = df[['input_voltage']]
 y = df['el_power']
-
-# Train-test split
 split_index = int(len(df) * 0.8)
 X_train, X_test = X[:split_index], X[split_index:]
 y_train, y_test = y[:split_index], y[split_index:]
-
-# Train the model
 model = LinearRegression()
 model.fit(X_train, y_train)
-
-# Predictions
 y_pred = model.predict(X_test)
-
-# Evaluation metrics
-mse = mean_squared_error(y_test, y_pred)
-rmse = np.sqrt(mse)
-mae = mean_absolute_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-
-print(f"RMSE: {rmse:.2f} W")
-print(f"MAE: {mae:.2f} W")
-print(f"R² Score: {r2:.3f}")
-
-# Plot: Actual vs Predicted over time
+mse = mean_squared_error(y_test, y_pred)  # Calculate MSE
+rmse = mse**0.5  # Calculate RMSE
+print(f'RMSE: {rmse:.2f} W')
 plt.figure(figsize=(10, 5))
 plt.plot(y_test.values, label='Actual')
 plt.plot(y_pred, label='Predicted')
+plt.legend()
 plt.title('Actual vs Predicted Electrical Power')
 plt.xlabel('Time')
 plt.ylabel('Power (W)')
-plt.legend()
-plt.show()
-
-# Plot: Scatter of Predictions vs Inputs
-plt.figure(figsize=(8, 5))
-plt.scatter(X_test, y_test, color='blue', label='Actual')
-plt.plot(X_test, y_pred, color='red', label='Predicted')
-plt.xlabel('Input Voltage')
-plt.ylabel('Electrical Power')
-plt.title('Linear Regression Results')
-plt.legend()
 plt.show()
 # output:
+![image](https://github.com/user-attachments/assets/a3d9824c-3232-4928-a639-fbf1295ef26e)
 
 
 ### Result:
